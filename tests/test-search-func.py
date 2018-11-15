@@ -11,20 +11,23 @@ class Test_search_functionality(unittest.TestCase):
 
     def test_if_items_are_correctly_filtered_and_sorted(self):
         driver = self.driver
+        user = User(driver)
 
         #verify the url status
-        user = User(driver)
         user.check_url_status(url)
 
         #get url
         driver.get(url)
 
         #click web element
-
+        data_qa_selector = 'filter-year'
+        user.click_a_web_element(data_qa_selector)
 
         #choose 2015 on year select
+        user.choose_a_value_in_a_select('yearRange.min', '2015')
 
         #sort by desc price
+        
 
 
         ##verify that items are filtered by year
