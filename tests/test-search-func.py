@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from all_imports import *
 from user import *
+
 
 class Test_search_functionality(unittest.TestCase):
 
@@ -9,7 +12,9 @@ class Test_search_functionality(unittest.TestCase):
         global url
         url = 'https://www.autohero.com/de/search/'
 
+
     def test_if_items_are_correctly_filtered_and_sorted(self):
+        #init
         driver = self.driver
         user = User(driver)
 
@@ -26,13 +31,16 @@ class Test_search_functionality(unittest.TestCase):
         #choose 2015 on year select
         user.choose_a_value_in_a_select('yearRange.min', '2015')
 
-        #sort by desc price
-        
+        #sort by desc price using a select
+        user.choose_a_value_in_a_select('sort', 'offerPrice.amountMinorUnits.desc')
+        print driver.current_url
+
 
 
         ##verify that items are filtered by year
         ##verify that items are sorted by desc price
         pass
+
 
     def tearDown(self):
         self.driver.quit()
