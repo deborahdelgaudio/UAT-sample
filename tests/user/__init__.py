@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 from all_imports import *
 
-
 # user() implements user's actions on browser
 
 class User ():
 
     def __init__(self, driver):
         self.driver = driver
-
 
     def check_url_status(self, url):
         res = requests.get(url)
@@ -17,10 +15,8 @@ class User ():
         else:
             self.fail(msg='Bad status code: %s' % res.status_code)
 
-
     def click_a_web_element(self, element):
         self.driver.find_element_by_xpath('//*[@data-qa-selector="%s"]' % element).click ()
-
 
     ('\n'
      '    :params\n'

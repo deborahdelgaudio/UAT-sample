@@ -3,26 +3,20 @@
 from all_imports import *
 from user import *
 
-
 class Test_search_functionality(unittest.TestCase):
 
     def setUp(self):
         path = os.getcwd() + '/chrome-driver/chromedriver'
         self.driver = webdriver.Chrome(executable_path=path)
-        global url
-        url = 'https://www.autohero.com/de/search/'
-
+        self.url = 'https://www.autohero.com/de/search/'
 
     def test_if_items_are_correctly_filtered_and_sorted(self):
-        #init
         driver = self.driver
         user = User(driver)
 
-        #verify the url status
-        user.check_url_status(url)
+        user.check_url_status(self.url)
 
-        #get url
-        driver.get(url)
+        driver.get(self.url)
 
         #click web element
         data_qa_selector = 'filter-year'
@@ -33,7 +27,7 @@ class Test_search_functionality(unittest.TestCase):
 
         #sort by desc price using a select
         user.choose_a_value_in_a_select('sort', 'offerPrice.amountMinorUnits.desc')
-        print driver.current_url
+
 
 
 
@@ -41,10 +35,8 @@ class Test_search_functionality(unittest.TestCase):
         ##verify that items are sorted by desc price
         pass
 
-
     def tearDown(self):
         self.driver.quit()
-
 
 if __name__ == "__main__":
     unittest.main()
