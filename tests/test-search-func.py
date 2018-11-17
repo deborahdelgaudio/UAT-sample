@@ -46,7 +46,7 @@ class Test_search_functionality(unittest.TestCase):
             value_filter_applied = int(value_filter_applied)
             self.assertEqual(value_filter_applied, 2015)
         except:
-            self.fail('It\'s not possible to see the active filter \'Erstzulassung von\'')
+            self.fail('It\'s not possible to see the active filter \'Registration year\'')
 
         spec_list = driver.find_elements_by_xpath('//*[@data-qa-selector="spec-list"]')
 
@@ -64,8 +64,18 @@ class Test_search_functionality(unittest.TestCase):
         self.assertGreaterEqual(reg_years, 2015)
 
 
-        ##verify that items are sorted by desc price
-        pass
+        '''Verify that items are sorted by descending price by checking: query string and price on cards'''
+        self.assertIn('sort=PRICE_DESC', current_url, 'Query string is incorrect %s' %current_url)
+
+        prices = driver.find_elements_by_xpath('//*[@data-qa-selector="price"]')
+
+        price_list = []
+        for price in prices:
+            p = str(price.text.encode('ascii','replace')).split(' ')[0].replace('.', '')
+            p = int(p)
+            price_list.append(p)
+
+        self.assertTrue(all(first >= second for first, second in zip(price_list, price_list[1:])))
 
 if __name__ == "__main__":
     unittest.main()
