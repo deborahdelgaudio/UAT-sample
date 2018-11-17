@@ -1,4 +1,5 @@
-from all_imports.all_imports import *
+from all_imports import *
+
 '''
     User implements user's actions on browser
 '''

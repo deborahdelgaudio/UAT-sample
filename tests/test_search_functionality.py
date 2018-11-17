@@ -1,18 +1,19 @@
 # -*- coding: UTF-8 -*-
-from user.user import User
-from user.all_imports.all_imports import *
+from user import User
+from all_imports import *
 
 class Test_search_functionality(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        path = os.getcwd() + '/tests/chromedriver/chromedriver'
+        path = os.getcwd() + '/tests/chromedriver/chromedriver'  #chromedriver will be on docker container
+        #path = os.getcwd() + '/chromedriver/chromedriver'  #chromedriver will be on docker container
 
         options = webdriver.ChromeOptions()
         options.add_argument('--no-sandbox')
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
-        #add viewport
+        options.add_argument('--window-size=1366,768')
 
         self.driver = webdriver.Chrome(executable_path=path, chrome_options=options)
         self.url = 'https://www.autohero.com/de/search/'
@@ -23,6 +24,7 @@ class Test_search_functionality(unittest.TestCase):
 
     '''Filter for 2015 as minimum registration year and sort by descending price'''
     def test_if_items_are_correctly_filtered_and_sorted(self):
+        """Test if items are correctly filtered and sorted"""
         driver = self.driver
         user = User(driver)
 
@@ -79,4 +81,5 @@ class Test_search_functionality(unittest.TestCase):
         self.assertTrue(all(first >= second for first, second in zip(price_list, price_list[1:])))
 
 if __name__ == "__main__":
-    unittest.main()
+    path = os.getcwd() + '/../results'
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=path))
