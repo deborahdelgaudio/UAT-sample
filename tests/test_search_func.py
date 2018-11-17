@@ -6,14 +6,16 @@ class Test_search_functionality(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        path = os.getcwd() + '/chromedriver/chromedriver'
-        self.driver = webdriver.Chrome(executable_path=path)
-        self.url = 'https://www.autohero.com/de/search/'
+        path = os.getcwd() + '/tests/chromedriver/chromedriver'
 
-        ##        chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument('--no-sandbox')
-        #chrome_options.add_argument('--headless')
-        #chrome_options.add_argument('--disable-gpu')
+        options = webdriver.ChromeOptions()
+        options.add_argument('--no-sandbox')
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        #add viewport
+
+        self.driver = webdriver.Chrome(executable_path=path, chrome_options=options)
+        self.url = 'https://www.autohero.com/de/search/'
 
     '''Stop web driver'''
     def tearDown(self):

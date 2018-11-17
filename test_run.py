@@ -1,5 +1,5 @@
 import tests.test_search_func
-import unittest
+from tests.user.all_imports.all_imports import *
 # import HTMLTestRunner pip install html-testRunner
 
 '''Initialize TestSuite and add TestCase'''
