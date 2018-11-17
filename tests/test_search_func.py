@@ -1,12 +1,12 @@
-# -*- coding: <UTF-8> -*-
-from all_imports import *
-from user import *
+# -*- coding: UTF-8 -*-
+from user.user import User
+from user.all_imports.all_imports import *
 
 class Test_search_functionality(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        path = os.getcwd() + '/chrome-driver/chromedriver'
+        path = os.getcwd() + '/chromedriver/chromedriver'
         self.driver = webdriver.Chrome(executable_path=path)
         self.url = 'https://www.autohero.com/de/search/'
 
@@ -33,7 +33,6 @@ class Test_search_functionality(unittest.TestCase):
         user.choose_a_value_in_a_select('yearRange.min', '2015')  # choose 2015 on year select
 
         user.choose_a_value_in_a_select('sort', 'offerPrice.amountMinorUnits.desc')  # sort by desc price using a select
-        print driver.current_url
 
         current_url = driver.current_url
 
