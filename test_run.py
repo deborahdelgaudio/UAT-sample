@@ -1,15 +1,12 @@
-import tests.test_search_functionality as test_search_functionality
+from tests.test_search_functionality import TestSearchFunctionality
 from tests.all_imports import *
-import HtmlTestRunner
-
-# pip install html-testRunner
 
 '''Initialize TestSuite and add TestCase'''
 search_functionality_suite = unittest.TestSuite()
 search_functionality_suite.addTest(
-    unittest.TestLoader().loadTestsFromTestCase(test_search_functionality.Test_search_functionality)
+    unittest.defaultTestLoader.loadTestsFromTestCase(TestSearchFunctionality)
 )
 
 '''Run TestSuite'''
-runner = HtmlTestRunner.HTMLTestRunner(output='.')
+runner = HtmlTestRunner.HTMLTestRunner(verbosity=2, output='.')
 runner.run(search_functionality_suite)
