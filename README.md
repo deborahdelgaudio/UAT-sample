@@ -1,13 +1,58 @@
 # Test search functionality
-> A super test suite for auto1 search page
+> A super test suite for autohero.com search page
 
 ## Description
 
+This is a test suite written in python, that tests the search functionality of autohero.com.
+This application uses: 
 
-## How to use
+- **Unittest**,  a python framework useful to organize the test's code 
+- **Selenium webdriver** with python bindings that provides an instance of the Chrome browser and some useful methods to interact with it 
+- Some external python's libraries like _HtmlTestRunner_ and _requests_ 
 
-clone the repository
-build docker image: docker build -t ${container_name}
+The application runs in a Docker container. 
 
-run the container: docker run test-search-functionality
-(it runs the test)
+## How to run test suite
+
+You have to clone the repository and build the Docker image by typing this command on the terminal:
+
+```
+$ docker build -t ${container_name}
+```
+
+where _${container_name}_ is the name that you have to choose for the container.
+
+Now you are ready to test the autohero's search functionality by running the container, through this:
+
+```
+$ docker run ${container_name}
+```
+
+Test will automatically run and the results are can be seen as a terminal's output.  
+
+If you want to access the HTMLTestRunner report run the container with the following command:
+
+```
+$ docker run -v $(pwd)/reports:/var/www/test-search-functionality/reports ${container_name}
+```
+
+### Requirments
+
+If you want to run the suite locally, without the Docker's container, you need:
+
+- python 2.7
+- pip
+- selenium
+- chromedriver
+- HtmlTestRunner
+- Requests
+
+Using the docker's container, only Docker is required.
+
+### Sources
+
+- [Python's unittest](https://docs.python.org/2/library/unittest.html)
+- [Selenium webdriver](https://www.seleniumhq.org/docs/03_webdriver.jsp) 
+- [Selenium with Python bindings](https://selenium-python.readthedocs.io/)
+- [Docker CE](https://docs.docker.com/install/)
+- [Docker's container with selenium and python](https://github.com/joyzoursky/docker-python-chromedriver)
