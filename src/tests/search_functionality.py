@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
-from user import User
-from all_imports import *
+from utility import *
 
-class TestSearchFunctionality(unittest.TestCase):
+class SearchFunctionality(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
