@@ -1,18 +1,14 @@
 # -*- coding: UTF-8 -*-
-from utility import *
+from test_manager import test_manager
+from user import User
+import unittest
 
 class SearchFunctionality(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument('--no-sandbox')
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--window-size=1366,768')
-
-        self.driver = webdriver.Chrome(chrome_options=options)
-        self.url = 'https://www.autohero.com/de/search/'
+        self.driver = test_manager.driver.build_driver()
+        self.url = test_manager.url
 
     '''Stop web driver'''
     def tearDown(self):
@@ -21,12 +17,12 @@ class SearchFunctionality(unittest.TestCase):
     '''Filter for 2015 as minimum registration year and sort by descending price'''
     def test_if_items_are_correctly_filtered_and_sorted(self):
         """Test if items are correctly filtered and sorted"""
-        driver = self.driver
-        user = User(driver)
+        d = self.driver
+        user = User(d)
 
         user.check_url_status(self.url)
 
-        driver.get(self.url)
+        d.get(self.url)
 
         user.click_a_web_element('filter-year')
 
@@ -34,7 +30,7 @@ class SearchFunctionality(unittest.TestCase):
 
         user.choose_a_value_in_a_select('sort', 'offerPrice.amountMinorUnits.desc')  # sort by desc price using a select
 
-        current_url = driver.current_url
+        current_url = d.current_url
 
         '''Verify that items has been filtered by checking: query string on url, applied filter and registration date on cards'''
         self.assertIn('yearMin=2015', current_url, 'Query string is incorrect %s' %current_url)
