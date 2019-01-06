@@ -39,9 +39,8 @@ if __name__ == "__main__":
 
     '''Initialize TestSuite and add TestCase'''
     suite = unittest.TestSuite()
-    testsclass = get_test_case_class()
 
-    for testclass in testsclass:
+    for testclass in get_test_case_class():
         suite.addTests(unittest.TestLoader().loadTestsFromTestCase(testclass))
 
     if get_parameters().html_report == 'y':
