@@ -24,6 +24,8 @@ class GetDriver():
             else:
                 print('There was a problem with viewport parameter set: {}'.format(self.viewport))
                 sys.exit()
+        #else: TO DO With firefox
+
 
         return options
 
@@ -32,5 +34,6 @@ class GetDriver():
         options = self.__add_options()
         if 'chrome' in self.browser:
             self.driver = webdriver.Chrome(options=options, executable_path=self.driver_path)
+        #else: TO DO with firefox
 
         return self.driver

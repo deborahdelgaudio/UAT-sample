@@ -6,7 +6,6 @@ sys.path.insert(0, os.getcwd()+'/config/')
 for folder in folders:
     sys.path.insert(0, os.getcwd() + '/src/' + folder)
 
-from search_functionality import SearchFunctionality
 from test_manager import test_manager
 from test_config import url
 import unittest
@@ -25,6 +24,14 @@ def get_parameters():
 
     return output
 
+def get_test_case_class():
+    modules = glob.glob('src/tests/' + test_manager.scenario + '.py')
+    for m in modules:
+        file_name,file_ext = os.path.splitext(os.path.basename(m))
+        current_module = importlib.import_module(file_name)
+        for name, obj in inspect.getmembers(sys.modules[current_module.__name__]):
+            if inspect.isclass(obj) and 'Scenario' in obj.__name__:
+                yield obj
 
 if __name__ == "__main__":
 
@@ -32,7 +39,10 @@ if __name__ == "__main__":
 
     '''Initialize TestSuite and add TestCase'''
     suite = unittest.TestSuite()
-    suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(SearchFunctionality))
+    testsclass = get_test_case_class()
+
+    for testclass in testsclass:
+        suite.addTests(unittest.TestLoader().loadTestsFromTestCase(testclass))
 
     if get_parameters().html_report == 'y':
         '''Run TestSuite with HtmlTestRuner'''

@@ -13,7 +13,7 @@ class User ():
         if res.status_code == 200:
             pass
         else:
-            self.fail('Bad status code: %s' % res.status_code)
+            self.driver.fail('Bad status code: %s' % res.status_code)
 
     def click_a_web_element(self, data_qa_selector):
         self.driver.find_element_by_xpath('//*[@data-qa-selector="%s"]' % data_qa_selector).click()
@@ -30,7 +30,7 @@ class User ():
             else:
                 pass
 
-        select.select_by_value('%s' % corresponding_value)
+        select.select_by_value('{}'.format(corresponding_value))
 
         wait = WebDriverWait(self.driver, 8)
         wait.until(EC.element_to_be_selected(element_selected))
