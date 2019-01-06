@@ -42,12 +42,18 @@ If you want to run the suite locally, without the Docker's container, you need:
 
 - python 2.7
 - pip
-- selenium
-- chromedriver
-- HtmlTestRunner
-- Requests
+
+Run the following command:
+
+```
+$ pip install -r requirements.txt
+```
+
+Pip will install all packages needed.
 
 Using the docker's container, only Docker is required.
+
+
 
 ### Sources
 
