@@ -4,7 +4,7 @@ url = 'https://www.autohero.com/de/search/'
 
 data_qa_selector = (
     'filter-year',
-    '2016',
+    '2015',
     'offerPrice.amountMinorUnits.desc',
     'active-filter',
     'spec-list',
