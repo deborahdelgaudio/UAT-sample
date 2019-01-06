@@ -15,14 +15,14 @@ class TestManager():
         self.viewport = None
         self.driver = None
 
-    def SetUp(self, url, scenario, browser, viewport):
+    def SetUp(self, url, scenario, browser, viewport, driver_path):
 
         self.url = url
         self.scenario = scenario
         self.browser = browser
         self.viewport = viewport
 
-        self.driver = GetDriver(browser, viewport)
+        self.driver = GetDriver(browser, viewport, driver_path)
 
 
 test_manager = TestManager()

@@ -50,10 +50,13 @@ $ pip3 install -r requirements.txt
 ```
 
 Pip will install all packages needed.
+By running TestSuite locally you can change some parameters, type:
+```
+$ python3 main.py --help
+```
+to see which parameteres you can change.
 
 Using the docker's container, only Docker is required.
-
-
 
 ### Sources
 

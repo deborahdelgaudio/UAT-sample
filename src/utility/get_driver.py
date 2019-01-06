@@ -4,10 +4,11 @@ from selenium import webdriver
 
 class GetDriver():
 
-    def __init__(self, browser, viewport):
+    def __init__(self, browser, viewport, driver_path):
         self.browser = browser
         self.viewport = viewport
         self.driver = None
+        self.driver_path = driver_path
 
     def __add_options(self):
 
@@ -30,6 +31,6 @@ class GetDriver():
 
         options = self.__add_options()
         if 'chrome' in self.browser:
-            self.driver = webdriver.Chrome(options=options)
+            self.driver = webdriver.Chrome(options=options, executable_path=self.driver_path)
 
         return self.driver
