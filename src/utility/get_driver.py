@@ -21,12 +21,12 @@ class GetDriver():
             elif 'desktop' in self.viewport:
                 options.add_argument('--window-size=1366,768')
             else:
-                print 'There was a problem with viewport parameter set: %s' %self.viewport
+                print('There was a problem with viewport parameter set: {}'.format(self.viewport))
                 sys.exit()
 
         return options
 
-    def buld_driver(self):
+    def build_driver(self):
 
         options = self.__add_options()
         if 'chrome' in self.browser:

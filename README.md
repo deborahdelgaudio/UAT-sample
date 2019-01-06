@@ -40,13 +40,13 @@ $ docker run -v $(pwd)/reports:/var/www/test-search-functionality/reports ${cont
 
 If you want to run the suite locally, without the Docker's container, you need:
 
-- python 2.7
+- python 3.7
 - pip
 
 Run the following command:
 
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 Pip will install all packages needed.
