@@ -4,6 +4,7 @@ from user import User
 from config.test_config import data_qa_selector
 from config.test_config import select_name
 import unittest
+import time
 
 class SearchFunctionalityScenario(unittest.TestCase):
 
@@ -37,14 +38,14 @@ class SearchFunctionalityScenario(unittest.TestCase):
         self.assertIn('yearMin=2016', current_url, 'Query string is incorrect {}'.format(current_url))
         time.sleep(2)
         try:
-            filter_applied = driver.find_element_by_xpath('//*[@data-qa-selector="{}"]'.format(data_qa_selector[3]))
+            filter_applied = d.find_element_by_xpath('//*[@data-qa-selector="{}"]'.format(data_qa_selector[3]))
             value_filter_applied = filter_applied.get_attribute('data-qa-selector-value')
             value_filter_applied = int(value_filter_applied)
             self.assertEqual(value_filter_applied, 2016)
         except:
             self.fail('It\'s not possible to see the active filter \'Registration year\'')
 
-        spec_list = driver.find_elements_by_xpath('//*[@data-qa-selector=""]'.format(data_qa_selector[4]))
+        spec_list = d.find_elements_by_xpath('//*[@data-qa-selector=""]'.format(data_qa_selector[4]))
 
         reg_dates = []
         for spec in spec_list:
@@ -61,9 +62,9 @@ class SearchFunctionalityScenario(unittest.TestCase):
 
 
         '''Verify that items are sorted by descending price by checking: query string and price on cards'''
-        self.assertIn('sort=PRICE_DESC', current_url, 'Query string is incorrect %s' %current_url)
+        self.assertIn('sort=PRICE_DESC', current_url, 'Query string is incorrect {}'.format(current_url))
 
-        prices = driver.find_elements_by_xpath('//*[@data-qa-selector=""]'.format(data_qa_selector[6]))
+        prices = d.find_elements_by_xpath('//*[@data-qa-selector=""]'.format(data_qa_selector[6]))
 
         price_list = []
         for price in prices:
