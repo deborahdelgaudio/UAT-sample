@@ -23,9 +23,9 @@ $ pip3 install -r requirements.txt
 You need to up docker compose's services, through this:
 
 ```
-$ docker-compose -f docker-compose.yaml
+$ docker-compose -f docker-compose.yaml up 
 ```
-
+replace `down` with `up` if you want to remove the containers.
 
 At this point you can run test's application performing this command inside the app's directory:
 
