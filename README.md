@@ -1,62 +1,62 @@
-# Test search functionality
-> A super test suite for autohero.com search page
+# UAT
+> User's happy path performed automatically ! 
 
 ## Description
 
-This is a test suite written in python, that tests the search functionality of autohero.com.
+This is a test suite written in python, it tests the search functionality of autohero.com's search page, as a sample of UAT.
 This application uses: 
 
 - **Unittest**,  a python framework useful to organize the test's code 
 - **Selenium webdriver** with python bindings that provides an instance of the Chrome browser and some useful methods to interact with it 
-- Some external python's libraries like _HtmlTestRunner_ and _requests_ 
+- Some external python's libraries
 
-The application runs in a Docker container. 
+The application use a docker compose to connect to Remote WebDrivers (Chrome and Firefox).
 
 ## How to run test suite
 
-You have to clone the repository and build the Docker image by typing this command on the terminal:
-
-```
-$ docker build -t ${container_name}
-```
-
-where _${container_name}_ is the name that you have to choose for the container.
-
-Now you are ready to test the autohero's search functionality by running the container, through this:
-
-```
-$ docker run ${container_name}
-```
-
-Test will automatically run and the results are can be seen as a terminal's output.  
-
-If you want to access the HTMLTestRunner report run the container with the following command:
-
-```
-$ docker run -v $(pwd)/reports:/var/www/test-search-functionality/reports ${container_name}
-```
-
-### Requirments
-
-If you want to run the suite locally, without the Docker's container, you need:
-
-- python 3.7
-- pip
-
-Run the following command:
+Clone the repository and install the requirements using pip:
 
 ```
 $ pip3 install -r requirements.txt
 ```
 
-Pip will install all packages needed.
-By running TestSuite locally you can change some parameters, type:
-```
-$ python3 main.py --help
-```
-to see which parameteres you can change.
+You need to up docker compose's services, through this:
 
-Using the docker's container, only Docker is required.
+```
+$ docker-compose -f docker-compose.yaml
+```
+
+
+At this point you can run test's application performing this command inside the app's directory:
+
+```
+$ python3 main.py 
+```
+
+
+Some parameters are available to run the test, type `--help` for more details, here is a short list of parameters: 
+- browser
+- viewport
+- test file
+- html report
+
+
+A docker image is available to run test into a container without installing packages, (a local option has to be implemented).
+First build the image:
+```
+$ docker build . -t ${container_name}
+```
+Then run the container:
+```
+$ docker run -v $(pwd):/var/www/uat -ti ${container_name} /bin/bash
+```
+Now you are ready to run tests as described above.
+
+
+### Requirments
+- python 3.7
+- pip
+- Docker 
 
 ### Sources
 
@@ -64,4 +64,3 @@ Using the docker's container, only Docker is required.
 - [Selenium webdriver](https://www.seleniumhq.org/docs/03_webdriver.jsp) 
 - [Selenium with Python bindings](https://selenium-python.readthedocs.io/)
 - [Docker CE](https://docs.docker.com/install/)
-- [Docker's container with selenium and python](https://github.com/joyzoursky/docker-python-chromedriver)
