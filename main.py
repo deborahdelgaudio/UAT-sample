@@ -17,7 +17,7 @@ from HTMLTestRunner import HTMLTestRunner
 def get_parameters():
     parser = argparse.ArgumentParser (description='** THIS IS A SAMPLE OF User Acceptance Test -- Author: Deborah Del Gaudio **')
 
-    parser.add_argument ('-b', '--browser', help='specify browser', type=str, default='chrome', choices=['chrome', 'firefox -->not available on container!'])
+    parser.add_argument ('-b', '--browser', help='specify browser', type=str, default='chrome', choices=['chrome', 'firefox'])
     parser.add_argument('-t', '--testfile', help="specify the testfile that you want to execute", type=str, default='*')
     parser.add_argument ('-v', '--viewport', help='specify on which viewport you want run test', type=str, choices=['mobile', 'desktop'], default='desktop')
     parser.add_argument ('-html', '--html_report', help='set \'n\' to disable html report', type=str, choices=['y', 'n'], default='y')

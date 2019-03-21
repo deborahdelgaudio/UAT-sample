@@ -10,7 +10,7 @@ class SearchFunctionalityScenario(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        self.driver = test_manager.driver.build_driver()
+        self.driver = test_manager.driver.get_driver()
         self.url = test_manager.url
 
     '''Stop web driver'''
