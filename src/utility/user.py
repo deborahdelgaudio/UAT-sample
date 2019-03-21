@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import requests
 '''
     User implements user's actions on browser
 '''

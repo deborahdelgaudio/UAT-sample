@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
 from test_manager import test_manager
 from user import User
-from config.test_config import data_qa_selector
-from config.test_config import select_name
 import unittest
 import time
 
