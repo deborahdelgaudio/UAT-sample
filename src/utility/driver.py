@@ -1,14 +1,13 @@
 # coding=utf-8
-from all_imports import *
 from selenium import webdriver
 
-class GetDriver():
+class Driver():
 
-    def __init__(self, browser, viewport, driver_path):
+    def __init__(self, browser, viewport):
         self.browser = browser
         self.viewport = viewport
         self.driver = None
-        self.driver_path = driver_path
+        #self.driver_path = driver_path using remote driver
 
     def __add_options(self):
 

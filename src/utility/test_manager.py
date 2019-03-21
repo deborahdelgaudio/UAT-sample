@@ -1,6 +1,5 @@
 # coding=utf-8
-from all_imports import *
-from get_driver import GetDriver
+from driver import Driver
 
 class TestManager():
     """
@@ -15,14 +14,14 @@ class TestManager():
         self.viewport = None
         self.driver = None
 
-    def SetUp(self, url, scenario, browser, viewport, driver_path):
+    def SetUp(self, url, scenario, browser, viewport):
 
         self.url = url
         self.scenario = scenario
         self.browser = browser
         self.viewport = viewport
 
-        self.driver = GetDriver(browser, viewport, driver_path)
+        self.driver = Driver(browser, viewport)
 
 
 test_manager = TestManager()

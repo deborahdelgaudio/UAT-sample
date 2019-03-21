@@ -1,0 +1,14 @@
+url : 'https://www.autohero.com/de/search/'
+#selectors
+  data_qa_selector:
+    - filter-year
+    - 2015
+    - offerPrice.amountMinorUnits.desc
+    - active-filter
+    - spec-list
+    - spec
+    - price
+# list of selects name that are on page
+  selects:
+    - yearRange.min
+    - sort

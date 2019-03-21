@@ -3,24 +3,22 @@ import glob
 import importlib
 import inspect
 import sys,os
-folders = ['tests', 'utility']
-sys.path.insert(0, os.getcwd()+'/config/')
+import unittest
+import datetime
 
+sys.path.insert(0, os.getcwd()+'/config/')
+folders = ['tests', 'utility']
 for folder in folders:
     sys.path.insert(0, os.getcwd() + '/src/' + folder)
 
 from test_manager import test_manager
-from test_config import url
-import unittest
-import HtmlTestRunner
+from HTMLTestRunner import HTMLTestRunner
 
 def get_parameters():
-    parser = argparse.ArgumentParser (description='** Search functionality tester **')
+    parser = argparse.ArgumentParser (description='** THIS IS A SAMPLE OF User Acceptance Test -- Author: Deborah Del Gaudio **')
 
-    parser.add_argument ('-u', '--url', help='specify url', type=str, default=url)
-    parser.add_argument ('-s', '--scenario', help='specify the name of the scenario', type=str, default='search_functionality')
-    parser.add_argument('-d', '--driver', help='specify where is the diver binary, if doesn\'t execute it on docker set the path of your local webdriver file', default= '/usr/local/bin/chromedriver')
     parser.add_argument ('-b', '--browser', help='specify browser', type=str, default='chrome', choices=['chrome', 'firefox -->not available on container!'])
+    parser.add_argument('-t', '--testfile', help="specify the testfile that you want to execute", type=str, default='*')
     parser.add_argument ('-v', '--viewport', help='specify on which viewport you want run test', type=str, choices=['mobile', 'desktop'], default='desktop')
     parser.add_argument ('-html', '--html_report', help='set \'n\' to disable html report', type=str, choices=['y', 'n'], default='y')
     output = parser.parse_args ()
@@ -36,9 +34,32 @@ def get_test_case_class():
             if inspect.isclass(obj) and 'Scenario' in obj.__name__:
                 yield obj
 
+def run_suite(testSuite):
+    if get_parameters().html_report == 'n':
+        unittest.TextTestRunner(verbosity=2).run(testSuite)
+
+    else:
+        now = str(datetime.datetime.now())
+
+        file_name = "search_functionality_" + get_parameters().browser + '_' + get_parameters().viewport + '_' + now
+        suite_title = 'UAT sample'
+        description = "Verify the search functionality into a listing page"
+
+        with open('reports/' + file_name + '.html', 'wb') as report:
+
+            runner = HTMLTestRunner(
+                stream=report,
+                title=suite_title,
+                description=description
+            )
+
+            runner.run(testSuite)
+
+    return True
+
 if __name__ == "__main__":
 
-    test_manager.SetUp(get_parameters().url,get_parameters().scenario,get_parameters().browser,get_parameters().viewport, get_parameters().driver)
+    test_manager.SetUp(url="url", scenario=get_parameters().testfile, browser=get_parameters().browser, viewport=get_parameters().viewport)
 
     '''Initialize TestSuite and add TestCase'''
     suite = unittest.TestSuite()
@@ -46,10 +67,4 @@ if __name__ == "__main__":
     for testclass in get_test_case_class():
         suite.addTests(unittest.TestLoader().loadTestsFromTestCase(testclass))
 
-    if get_parameters().html_report == 'y':
-        '''Run TestSuite with HtmlTestRuner'''
-        runner = HtmlTestRunner.HTMLTestRunner(verbosity=2, output='.')
-        runner.run(suite)
-    else:
-        runner = unittest.TextTestRunner(verbosity=2)
-        runner.run(suite)
+    run_suite(suite)

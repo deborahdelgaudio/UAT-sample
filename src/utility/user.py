@@ -1,4 +1,6 @@
-from all_imports import *
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 '''
     User implements user's actions on browser
 '''
@@ -19,6 +21,7 @@ class User ():
         self.driver.find_element_by_xpath('//*[@data-qa-selector="%s"]' % data_qa_selector).click()
 
     def choose_a_value_in_a_select(self, select_name, data_qa_selector):
+        global corresponding_value, element_selected
         select = Select(self.driver.find_element_by_name('%s' % select_name))
         options = select.options
 
