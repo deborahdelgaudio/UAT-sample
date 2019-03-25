@@ -5,6 +5,7 @@ from selenium.webdriver import Remote, ChromeOptions, FirefoxOptions
 import socket
 
 class Driver():
+    #TODO: local option --> use local webdriver
 
     def __init__(self, browser, viewport):
         self.browser = browser
@@ -42,8 +43,11 @@ class Driver():
         hostname = socket.gethostname()
         executor = "http://{localhost}:4444/wd/hub".format(localhost=hostname)
         opt , prf , cap = self.build_driver_parameters()
-        self.driver = Remote(command_executor=executor, desired_capabilities=cap, browser_profile=prf, options=opt)
+        return Remote(command_executor=executor, desired_capabilities=cap, browser_profile=prf, options=opt)
 
     def get_driver(self):
-
         return self.driver
+
+if __name__ == "__main__":
+    d = Driver("chrome", "desktop")
+    d.get_driver()

@@ -35,15 +35,20 @@ def get_test_case_class():
                 yield obj
 
 def run_suite(testSuite):
+
+    if get_parameters().testfile == "*":
+        name = "All_Testfiles"
+    else:
+        name = get_parameters().testfile
+
     if get_parameters().html_report == 'n':
         unittest.TextTestRunner(verbosity=2).run(testSuite)
-
     else:
         now = str(datetime.datetime.now())
 
-        file_name = "search_functionality_" + get_parameters().browser + '_' + get_parameters().viewport + '_' + now
+        file_name = name + '_' + get_parameters().browser + '_' + get_parameters().viewport + '_' + now
         suite_title = 'UAT sample'
-        description = "Verify the search functionality into a listing page"
+        description = "Verify the happy path :)"
 
         with open('reports/' + file_name + '.html', 'wb') as report:
 
@@ -59,7 +64,9 @@ def run_suite(testSuite):
 
 if __name__ == "__main__":
 
-    test_manager.SetUp(url="url", scenario=get_parameters().testfile, browser=get_parameters().browser, viewport=get_parameters().viewport)
+    conf_path = os.getcwd() + "/config/test_conf"
+
+    test_manager.SetUp(scenario=get_parameters().testfile, browser=get_parameters().browser, viewport=get_parameters().viewport, conf_path=conf_path)
 
     '''Initialize TestSuite and add TestCase'''
     suite = unittest.TestSuite()

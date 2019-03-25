@@ -10,6 +10,7 @@ This application uses:
 - **Selenium webdriver** with python bindings that provides an instance of the Chrome browser and some useful methods to interact with it 
 - Some external python's libraries
 
+
 The application use a docker compose to connect to Remote WebDrivers (Chrome and Firefox).
 
 ## How to run test suite
