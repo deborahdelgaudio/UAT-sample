@@ -1,38 +1,40 @@
 # -*- coding: UTF-8 -*-
 from test_manager import test_manager
-from user import User
 import unittest
 import time
 import yaml
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import requests
 
 class SearchFunctionalityScenario(unittest.TestCase):
 
     '''Start web driver'''
     def setUp(self):
-        self.driver = test_manager.driver.get_driver()
-        print(type(self.driver))
+
+        self.d= test_manager.driver.get_driver()
+
         with open(test_manager.conf_path, "r") as conf:
             self.data = yaml.load(conf, Loader=yaml.FullLoader)
         self.url = self.data["url"]
 
+        self.d.get(self.url)
+        self.d.find_element_by_class_name("root___1ZGR8").click()
+        time.sleep(1.5)
+
+        year_select = Select(self.d.find_element_by_name('%s' % self.data["selects"][0]))
+        year_select.select_by_visible_text("2016")
+
+        sort_select = Select(self.d.find_element_by_name('%s'%self.data["selects"][1]))
+        sort_select.select_by_visible_text("Höchster Preis")
+
     '''Stop web driver'''
     def tearDown(self):
-        self.driver.quit()
+        self.d.quit()
 
     def test_if_items_are_correctly_filtered_and_sorted(self):
         """Test if items are correctly filtered and sorted"""
-        d = self.driver
-        user = User(d)
-
-        user.check_url_status(self.url)
-
-        d.get(self.url)
-
-        user.click_a_web_element(self.data["data_qa_selector"][0])
-
-        user.choose_a_value_in_a_select(self.data["selects"][0], self.data["data_qa_selector"][1])  # choose 2016 on year select
-
-        user.choose_a_value_in_a_select(self.data["selects"][1], self.data["data_qa_selector"][2])  # sort by desc price using a select
 
         current_url = d.current_url
 

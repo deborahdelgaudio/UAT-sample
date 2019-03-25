@@ -11,4 +11,4 @@ data_qa_selector:
 # list of selects name that are on page
 selects:
   - yearRange.min
-  - sortpip
+  - sort
