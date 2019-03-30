@@ -24,7 +24,7 @@ $ pip3 install -r requirements.txt
 You need to up docker compose's services, through this:
 
 ```
-$ docker-compose -f docker-compose.yaml up 
+$ docker-compose up 
 ```
 replace `down` with `up` if you want to remove the containers.
 
