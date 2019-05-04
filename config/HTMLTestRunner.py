@@ -644,7 +644,8 @@ class HTMLTestRunner(Template_mixin):
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
-        print('\nTime Elapsed: %s' % (self.stopTime-self.startTime), file=sys.stderr)
+
+        print('\nTime Elapsed: %s' % (self.stopTime-self.startTime))
         return result
 
     def sort_result(self, result_list):

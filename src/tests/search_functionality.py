@@ -5,9 +5,6 @@ import time
 import yaml
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import requests
 
 class SearchFunctionalityScenario(unittest.TestCase):
 
@@ -42,14 +39,13 @@ class SearchFunctionalityScenario(unittest.TestCase):
 
         '''Verify that items has been filtered by checking: query string on url, applied filter and registration date on cards'''
         self.assertIn('yearMin=2016', current_url, 'Query string is incorrect {}'.format(current_url))
+
         time.sleep(2)
-        try:
-            filter_applied = self.d.find_element_by_xpath('//*[@data-qa-selector="{}"]'.format(self.data["data_qa_selector"][3]))
-            value_filter_applied = filter_applied.get_attribute('data-qa-selector-value')
-            value_filter_applied = int(value_filter_applied)
-            self.assertEqual(value_filter_applied, 2016)
-        except:
-            self.fail('It\'s not possible to see the active filter \'Registration year\'')
+
+        filter_applied = self.d.find_element_by_xpath('//*[@data-qa-selector="{}"]'.format(self.data["data_qa_selector"][3]))
+        value_filter_applied = filter_applied.get_attribute('data-qa-selector-value')
+        value_filter_applied = int(value_filter_applied)
+        self.assertEqual(value_filter_applied, 2016)
 
         spec_list = self.d.find_elements_by_xpath('//*[@data-qa-selector=""]'.format(self.data["data_qa_selector"][4]))
 
